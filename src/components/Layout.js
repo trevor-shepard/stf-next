@@ -16,7 +16,7 @@ function Layout({children}) {
 	return (
 		<Container>
 			<Navbar />
-			<MuiPickersUtilsProvider utils={MomentUtils}>{children}</MuiPickersUtilsProvider>
+			{children}
 		</Container>
 	)
 }

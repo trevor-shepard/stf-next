@@ -51,7 +51,7 @@ const NavLinks = styled.ul`
     flex-direction: row;
     margin-right: 20px;
 `
-const NavLink = styled.div`
+const NavLink = styled.a`
     padding-right: 10px;
     width: 80px;
     &:hover {
