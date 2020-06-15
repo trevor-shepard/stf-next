@@ -2,12 +2,12 @@ import React, {FunctionComponent, useState} from 'react';
 import styled from '@emotion/styled';
 import {useDispatch} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import {DatePicker} from '@material-ui/pickers';
+import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import BaseButton from '../../base/Button';
 import Modal from '../../base/Modal';
 import moment from 'moment';
 import {createSeason} from '../../../actions/seasons';
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+
 import MomentUtils from '@date-io/moment';
 
 const Screen: FunctionComponent = () => {

@@ -1,33 +1,33 @@
 import React, {FunctionComponent, useState} from 'react';
 import styled from '@emotion/styled';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Link from 'next/link';
-import {Season} from '../../../../types'
-import {List} from '../../../base'
+import {Season} from '../../../../types';
+import {List} from '../../../base';
 import {
 	ListItem,
 	ListItemText
 } from '@material-ui/core';
 
 interface ScreenProps {
-    season: Season
+	season: Season;
 }
-const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
-    const { voteStart } = season
+const Screen: FunctionComponent<ScreenProps> = ({season}) => {
+	const {voteStart} = season;
 
-    const users = Object.values(season.users).map((username, i) => (
-        <ListItem key={`${username}-${i}`}>
-            <ListItemText primary={username} />
-        </ListItem>
-    ))
-    
+	const users = Object.values(season.users).map((username, i) => (
+		<ListItem key={`${username}-${i}`}>
+			<ListItemText primary={username} />
+		</ListItem>
+	));
+
 	return (
 		<Container>
 			<h3>Waiting for Players to Join, Season Starts on {voteStart}</h3>
-            <div>Invite friends with the code {season.id}</div>
-            <List title='Players'>
-                { users }
-            </List>
+			<div>Invite friends with the code {season.id}</div>
+			<List title="Players">
+				{ users }
+			</List>
 		</Container>
 	);
 };

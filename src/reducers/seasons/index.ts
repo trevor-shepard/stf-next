@@ -13,8 +13,8 @@ const seasonsReducer = (
 	state = initialState,
 	action: SeasonActionTypes
 ): SeasonState => {
-	let season
-	let seasons
+	let season;
+	let seasons;
 	switch (action.type) {
 		case CREATE_SEASON:
 			season = action.payload;

@@ -1,11 +1,17 @@
-interface UserMap {
+export interface UserMap {
 	[userID: string]: string;
 }
 
-interface ActivtitesMap {
+export interface ActivtitesMap {
 	[activityName: string]: {
 		[userID: string]: number;
 	};
+}
+
+export interface VotesMap {
+	[activity: string]: {
+		[userID: string]: number
+	}
 }
 
 export interface Season {
@@ -14,9 +20,10 @@ export interface Season {
 	activites: ActivtitesMap;
 	phase: number;
 	id: string;
-	voteStart: Date,
-	createDate: Date,
-	seasonStart: Date,
+	votes: VotesMap;
+	voteStart: Date;
+	createDate: Date;
+	seasonStart: Date;
 }
 
 export interface SeasonState {
@@ -43,7 +50,5 @@ interface RecieveSeasonAction {
 	type: typeof RECIEVE_SEASON;
 	payload: Season;
 }
-
-
 
 export type SeasonActionTypes = CreateSeasonAction | RecieveSeasonsAction | RecieveSeasonAction;
