@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState, useEffect, ChangeEvent} from 'react';
+import React, {FunctionComponent, useState, useEffect, ChangeEvent, Dispatch, SetStateAction} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -31,10 +31,12 @@ const useStyles = makeStyles({
 
 interface ScreenProps {
     users: UserMap;
-    votes: VotesMap
+	votes: VotesMap;
+	setActivity: Dispatch<SetStateAction<string>>;
+	setValue: Dispatch<SetStateAction<number>>;
 }
 
-const Screen: FunctionComponent<ScreenProps> = ({users, votes}) => {
+const Screen: FunctionComponent<ScreenProps> = ({users, votes, setActivity, setValue}) => {
 	const classes = useStyles();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -90,12 +92,12 @@ const Screen: FunctionComponent<ScreenProps> = ({users, votes}) => {
 					<TableBody>
 						{rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
 							return (
-								<TableRow hover role="checkbox" tabIndex={-1} key={`${i}-row`}>
+								<TableRow hover role="checkbox" tabIndex={-1} key={`${i}-row`} onClick={() => setActivity(row.activity)}>
 									{columns.map(column => {
 										
 										const value = row[column.id];
 										return (
-											<TableCell key={column.id} align={column.align}>
+											<TableCell key={column.id} align={column.align} onClick={() => typeof value === 'number' ? setValue(value) : setValue(0) }>
 												{column.format && typeof value === 'number' ? column.format(value) : value}
 											</TableCell>
 										);

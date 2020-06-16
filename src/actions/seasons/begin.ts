@@ -1,10 +1,10 @@
 import {put} from '../../../lib/rest-utility';
 
-const vote = (seasonID: string, activity, value) => {
+const begin = (seasonID: string) => {
 	return async (dispatch, getState) => {
 		try {
 			const {token} = getState();
-			const season = await put(`season/${seasonID}/vote`, {activity, value}, token);
+			const season = await put(`season/${seasonID}/begin`, {}, token);
 			dispatch({type: 'RECIEVE_SEASON', payload: season});
 		} catch (error) {
 			dispatch({type: 'ERROR', payload: error.message});
@@ -12,4 +12,4 @@ const vote = (seasonID: string, activity, value) => {
 	};
 };
 
-export default vote;
+export default begin;

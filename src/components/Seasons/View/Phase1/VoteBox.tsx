@@ -16,6 +16,7 @@ interface ScreenProps {
 const Screen: FunctionComponent<ScreenProps> = ({setActivity, setValue, activity, value, handleVote, error }) => {
     return (
         <Modal>
+            <h4>Vote/Add Activites for season </h4>
 			<TextField value={activity} label="activity" type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setActivity(e.target.value)} />
 			<TextField value={value} label="value" type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
             <Button handleClick={handleVote} label="Submit" />

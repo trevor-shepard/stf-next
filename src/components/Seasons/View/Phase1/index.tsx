@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {useDispatch} from 'react-redux';
 import {Season} from '../../../../types';
 import VoteChart from './voteChart'
-import { voteSeason } from "../../../../actions/seasons";
+import { voteSeason, beginSeason } from "../../../../actions/seasons";
 import VoteBox from './VoteBox'
 interface ScreenProps {
 	season: Season;
@@ -21,12 +21,15 @@ const Screen: FunctionComponent<ScreenProps> = ({season}) => {
 		await dispatch(voteSeason(id, activity, value))
 	}
 
+	const handleBegin = async () => {
+		await dispatch(beginSeason(id))
+	}
+
 	return (
 		<Container>
-			<h3>Vote/Add Activites for season </h3>
-			<h4>Season Starts {seasonStart}</h4>
+			<h4>Season Starts {seasonStart} or <Clickable onClick={handleBegin}>begin now</Clickable></h4>
 			<VoteBox setActivity={setActivity} activity={activity} setValue={setValue} value={value} error={error} handleVote={handleVote} />
-            <VoteChart votes={votes} users={users} />
+            <VoteChart votes={votes} users={users} setActivity={setActivity} setValue={setValue} />
 		</Container>
 	);
 };
@@ -39,5 +42,14 @@ const Container = styled.div`
   flex-direction: column;
   position: relative;
 `;
+
+const Clickable = styled.div`
+	color: blue;
+	&:hover {
+		cursor: pointer;
+		font-weight: bold;
+		text-decoration: underline;
+    }
+`
 
 export default Screen;
