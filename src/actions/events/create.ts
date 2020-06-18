@@ -1,19 +1,17 @@
 import {post, get} from '../../../lib/rest-utility';
 
-import {Moment} from 'moment';
-
 interface Body {
-	name: string;
-	voteStart: Moment;
-	seasonStart: Moment;
+	activity: string;
+	
 }
 
-const createSeason = (body: Body) => {
+const createEvent  = (body: Body) => {
 	return async (dispatch, getState) => {
 		try {
 			const {token} = getState();
-			const season = await post('season', body, token);
-
+			debugger
+			const season = await post('event', body, token);
+			
 			dispatch({type: 'CREATE_SEASON', payload: season});
 
 			const profile = await get('user', token);
@@ -24,4 +22,4 @@ const createSeason = (body: Body) => {
 	};
 };
 
-export default createSeason;
+export default createEvent ;
