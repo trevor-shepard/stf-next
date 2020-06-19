@@ -8,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import {VotesMap, Season, UserMap} from '../../../../types';
+import {UserEventMap, UserMap, Season, Event} from '../../../../types';
+
 interface Column {
 	id: string;
 	label: string;
@@ -16,7 +17,6 @@ interface Column {
 	align?: 'right';
 	format?: (value: number) => string;
 }
-
 const useStyles = makeStyles({
 	root: {
 		width: '100%'
@@ -27,17 +27,16 @@ const useStyles = makeStyles({
 });
 
 interface ScreenProps {
-	users: UserMap;
-	votes: VotesMap;
-	setActivity: Dispatch<SetStateAction<string>>;
-	setValue: Dispatch<SetStateAction<number>>;
+	season: Season;
+	totalStandings: {[userID: string]: number}
+	activityStandings: { [activityName: string]: {[userID: string]: Event[] }}
 }
 
-const Screen: FunctionComponent<ScreenProps> = ({users, votes, setActivity, setValue}) => {
+const Screen: FunctionComponent<ScreenProps> = ({season, totalStandings, activityStandings}) => {
+	const {users} = season;
 	const classes = useStyles();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
-	const [rows, setRows] = useState([]);
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
 	};
@@ -60,13 +59,26 @@ const Screen: FunctionComponent<ScreenProps> = ({users, votes, setActivity, setV
 		return [...acc, column];
 	}, [{id: 'activity', label: 'Activity', minWidth: 170}]);
 
-	const createData = (activity, votes) => {
-		return Object.keys(votes).reduce((acc, userID) => ({...acc, [userID]: votes[userID]}), {activity});
-	};
 
-	useEffect(() => {
-		setRows(Object.keys(votes).map(activity => createData(activity, votes[activity])));
-	}, [votes]);
+	const totalRow = {
+		activity: 'Totals',
+		...totalStandings
+	}
+
+	const rows = Object.keys(activityStandings).reduce((acc, activity) => {
+		let row = {
+			activity
+		}
+
+		for (const userID of Object.keys(activityStandings[activity])) {
+			row = {
+				...row,
+				[userID]: activityStandings[activity][userID] ? activityStandings[activity][userID].length : 0
+			}
+		}
+
+		return [...acc, row];
+	}, [totalRow]);
 
 	return (
 		<Paper className={classes.root}>
@@ -88,11 +100,11 @@ const Screen: FunctionComponent<ScreenProps> = ({users, votes, setActivity, setV
 					<TableBody>
 						{rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
 							return (
-								<TableRow hover role="checkbox" tabIndex={-1} key={`${i}-row`} onClick={() => setActivity(row.activity)}>
+								<TableRow hover role="checkbox" tabIndex={-1} key={`${i}-row`} >
 									{columns.map(column => {
 										const value = row[column.id];
 										return (
-											<TableCell key={column.id} align={column.align} onClick={() => typeof value === 'number' ? setValue(value) : setValue(0) }>
+											<TableCell key={column.id} align={column.align} >
 												{column.format && typeof value === 'number' ? column.format(value) : value}
 											</TableCell>
 										);

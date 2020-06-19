@@ -3,21 +3,19 @@ export interface UserMap {
 }
 
 export interface ActivtitesMap {
-	[activityName: string]: {
-		[userID: string]: number;
-	};
+	[activityName: string]: number
 }
 
 export interface VotesMap {
 	[activity: string]: {
-		[userID: string]: number
-	}
+		[userID: string]: number;
+	};
 }
 
 export interface Season {
 	name: string;
 	users: UserMap;
-	activites: ActivtitesMap;
+	activities: ActivtitesMap;
 	phase: number;
 	id: string;
 	votes: VotesMap;

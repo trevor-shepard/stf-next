@@ -13,7 +13,7 @@ import Link from 'next/link';
 const Screen: FunctionComponent = () => {
 	const profile = useSelector(state => state.profile);
 	if (!profile.seasons) {
-		return(
+		return (
 			<Modal>
 				<Title>Sorry there has been an error, try loggin in again</Title>
 			</Modal>

@@ -6,23 +6,26 @@ import {
 	ListItemText
 } from '@material-ui/core';
 import List from '../../base/List';
-import Confirm from './Confirm'
+import Confirm from './Confirm';
 const Screen: FunctionComponent = () => {
-    const profile = useSelector(state => state.profile);
-    const [activity, setActivity] = useState('')
-    
-    const activities = Object.keys(profile.activities).map((activity, index) => {
-        return (
-            <ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)}>
-                <ListItemText primary={activity} />
-            </ListItem>
+	const profile = useSelector(state => state.profile);
+	const [activity, setActivity] = useState('');
+	if (!profile.id || profile.id === null) {
+		return (<div>Loading</div>);
+	}
+
+	const activities = Object.keys(profile.activities).map((activity, index) => {
+		return (
+			<ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)}>
+				<ListItemText primary={activity} />
+			</ListItem>
 		);
-    })
+	});
 	return (
 		<Container>
 			<h2>What you got going on today?</h2>
-            
-            {activity === '' ? <List title="Your Activites"> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
+
+			{activity === '' ? <List title="Your Activites"> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
 		</Container>
 	);
 };

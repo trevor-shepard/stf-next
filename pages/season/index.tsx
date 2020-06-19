@@ -4,6 +4,7 @@ import Router, {useRouter} from 'next/router';
 import {useSelector} from 'react-redux';
 import Phase0 from '../../src/components/Seasons/View/Phase0';
 import Phase1 from '../../src/components/Seasons/View/Phase1';
+import Phase2 from '../../src/components/Seasons/View/Phase2';
 const Screen: FunctionComponent = () => {
 	const seasons = useSelector(state => state.seasons);
 	const router = useRouter();
@@ -22,6 +23,8 @@ const Screen: FunctionComponent = () => {
 				return (<Phase0 season={season}/>);
 			case 1:
 				return (<Phase1 season={season}/>);
+			case 2:
+				return (<Phase2 season={season}/>);
 
 			default:
 				break;

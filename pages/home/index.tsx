@@ -1,11 +1,11 @@
 import React, {FunctionComponent, useState} from 'react';
 import styled from '@emotion/styled';
 import SeasonList from '../../src/components/Seasons/List';
-import {Logger} from '../../src/components/Events'
+import {Logger} from '../../src/components/Events';
 import {useMediaQuery} from 'react-responsive';
 
 const Screen: FunctionComponent = () => {
-	const isTabletOrMobile = useMediaQuery({query: '(max-width: 1224px)'});
+	const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'});
 
 	return (
 		<Container>
