@@ -1,12 +1,15 @@
 import React, {FunctionComponent, useState} from 'react';
 import styled from '@emotion/styled';
 import {useSelector} from 'react-redux';
-import {
-	ListItem,
-	ListItemText
-} from '@material-ui/core';
+
 import List from '../../base/List';
 import Confirm from './Confirm';
+
+import { ThemeProvider } from 'emotion-theming'
+import defaultTheme from '../../../styles/defaultTheme'
+import { Theme } from '../../../types'
+
+
 const Screen: FunctionComponent = () => {
 	const profile = useSelector(state => state.profile);
 	const [activity, setActivity] = useState('');
@@ -14,19 +17,23 @@ const Screen: FunctionComponent = () => {
 		return (<div>Loading</div>);
 	}
 
+
 	const activities = Object.keys(profile.activities).map((activity, index) => {
 		return (
-			<ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)}>
-				<ListItemText primary={activity} />
+			<ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)} >
+				{activity.toUpperCase()}
 			</ListItem>
 		);
 	});
+	
 	return (
-		<Container>
-			<h2>What you got going on today?</h2>
+			<ThemeProvider theme={defaultTheme}>
+				<Container >
+					<h2>What you got going on today?</h2>
 
-			{activity === '' ? <List title="Your Activites"> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
-		</Container>
+					{activity === '' ? <List> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
+				</Container>
+			</ThemeProvider>
 	);
 };
 
@@ -35,8 +42,20 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   position: relative;
+  flex-direction: column;
 `;
+
+const ListItem = styled.div`
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	height: 50px;
+	width: 100%;
+	background-color: ${props => props.theme.colors.primary};
+	border-radius: 4px;
+	color: ${props => props.theme.colors.text};
+	
+`
 
 export default Screen;

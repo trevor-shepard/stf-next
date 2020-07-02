@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
-import Router from 'next/router';
+import React from 'react';
 import {useSelector} from 'react-redux';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-function NavBarScreen({children}) {
+function NavBarScreen() {
 	const profile = useSelector(state => state.profile);
 	const token = useSelector(state => state.token);
 	if (!token) {

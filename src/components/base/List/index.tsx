@@ -11,22 +11,21 @@ const useStyles = makeStyles((theme: Theme) =>
 			overflow: 'scroll'
 		},
 		nested: {
-			paddingLeft: theme.spacing(4)
+			paddingLeft: theme.spacing(4),
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			color: theme.palette.primary.main
 		}
 	})
 );
 
-export default function NestedList({children, title}) {
+export default function NestedList({children}) {
 	const classes = useStyles();
 	return (
 		<List
 			component="nav"
 			aria-labelledby="nested-list-subheader"
-			subheader={
-				<ListSubheader component="div" id="nested-list-subheader">
-					{title}
-				</ListSubheader>
-			}
 			className={classes.root}
 		>
 			{children}

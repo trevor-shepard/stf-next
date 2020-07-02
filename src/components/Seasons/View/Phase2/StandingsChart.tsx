@@ -28,8 +28,8 @@ const useStyles = makeStyles({
 
 interface ScreenProps {
 	season: Season;
-	totalStandings: {[userID: string]: number}
-	activityStandings: { [activityName: string]: {[userID: string]: Event[] }}
+	totalStandings: {[userID: string]: number};
+	activityStandings: { [activityName: string]: {[userID: string]: Event[] }};
 }
 
 const Screen: FunctionComponent<ScreenProps> = ({season, totalStandings, activityStandings}) => {
@@ -59,22 +59,21 @@ const Screen: FunctionComponent<ScreenProps> = ({season, totalStandings, activit
 		return [...acc, column];
 	}, [{id: 'activity', label: 'Activity', minWidth: 170}]);
 
-
 	const totalRow = {
 		activity: 'Totals',
 		...totalStandings
-	}
+	};
 
 	const rows = Object.keys(activityStandings).reduce((acc, activity) => {
 		let row = {
 			activity
-		}
+		};
 
 		for (const userID of Object.keys(activityStandings[activity])) {
 			row = {
 				...row,
 				[userID]: activityStandings[activity][userID] ? activityStandings[activity][userID].length : 0
-			}
+			};
 		}
 
 		return [...acc, row];

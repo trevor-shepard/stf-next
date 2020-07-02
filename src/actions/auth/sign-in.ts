@@ -14,7 +14,6 @@ const signIn = (
 					console.log('response:', resp);
 					return resp.user.getIdToken();
 				});
-			debugger
 			const profile = await get('user', token);
 			dispatch({type: 'TOKEN_GRANTED', payload: token});
 			dispatch({type: 'LOG_IN', payload: profile});
@@ -22,8 +21,7 @@ const signIn = (
 
 			dispatch({type: 'RECIEVE_SEASONS', payload: seasons});
 		} catch (error) {
-			console.log(error)
-			debugger
+			console.log(error);
 			dispatch({type: 'ERROR', payload: error.message});
 		}
 	};

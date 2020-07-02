@@ -3,7 +3,7 @@ export interface UserMap {
 }
 
 export interface ActivtitesMap {
-	[activityName: string]: number
+	[activityName: string]: number;
 }
 
 export interface VotesMap {

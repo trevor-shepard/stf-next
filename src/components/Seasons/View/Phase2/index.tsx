@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {useDispatch, useSelector} from 'react-redux';
 import {getEvents} from '../../../../actions';
 import {Season} from '../../../../types';
-import StandingChart from './StandingsChart'
+import StandingChart from './StandingsChart';
 interface ScreenProps {
 	season: Season;
 }
@@ -31,32 +31,40 @@ const Screen: FunctionComponent<ScreenProps> = ({season}) => {
 		if (Object.keys(events).length === 0) {
 			return;
 		}
-		const updatedTotalStandings = JSON.parse(JSON.stringify(totalStandings))
-		const updatedActivityStandings = JSON.parse(JSON.stringify(activityStandings))
+
+		const updatedTotalStandings = JSON.parse(JSON.stringify(totalStandings));
+		const updatedActivityStandings = JSON.parse(JSON.stringify(activityStandings));
 		for (const userID of Object.keys(events)) {
-			const userEvents = events[userID]
-			let userTotal = 0
-			const userActivtyLog = {}
+			const userEvents = events[userID];
+			let userTotal = 0;
+			const userActivtyLog = {};
 			for (const event of userEvents) {
-				if (!Object.keys(activities).includes(event.activity)) continue
-				userTotal = userTotal + activities[event.activity]
+				if (!Object.keys(activities).includes(event.activity)) {
+					continue;
+				}
+
+				userTotal += activities[event.activity];
 
 				if (userActivtyLog[event.activity] === undefined) {
-					userActivtyLog[event.activity] = [event]
+					userActivtyLog[event.activity] = [event];
 				} else {
-					userActivtyLog[event.activity] = [...userActivtyLog[event.activity], event]
+					userActivtyLog[event.activity] = [...userActivtyLog[event.activity], event];
 				}
 			}
-			updatedTotalStandings[userID] = userTotal
-			
+
+			updatedTotalStandings[userID] = userTotal;
+
 			for (const activityName of Object.keys(userActivtyLog)) {
-				if (!Object.keys(activities).includes(activityName)) continue
-				updatedActivityStandings[activityName][userID] = userActivtyLog[activityName]
+				if (!Object.keys(activities).includes(activityName)) {
+					continue;
+				}
+
+				updatedActivityStandings[activityName][userID] = userActivtyLog[activityName];
 			}
 		}
 
-		setTotalStandings(updatedTotalStandings)
-		setActivityStandings(updatedActivityStandings)
+		setTotalStandings(updatedTotalStandings);
+		setActivityStandings(updatedActivityStandings);
 
 		setLoading(false);
 	}, [events]);
@@ -81,5 +89,4 @@ const Container = styled.div`
   position: relative;
 `;
 
-
-export default Screen
+export default Screen;

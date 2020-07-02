@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {withRedux} from '../../lib/with-redux-store';
 import styled from '@emotion/styled';
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 import Router from 'next/router';
 import {useSelector} from 'react-redux';
 import Navbar from './Navbar';
+
+
 function Layout({children}) {
 	const token = useSelector(state => state.token);
 	useEffect(() => {
@@ -13,11 +13,13 @@ function Layout({children}) {
 			Router.push('/sign-in');
 		}
 	  }, [token]);
+
+
 	return (
-		<Container>
-			<Navbar />
-			{children}
-		</Container>
+			<Container>
+				<Navbar />
+				{children}
+			</Container>
 	);
 }
 
