@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState, SetStateAction, Dispatch} from 'react';
+import React, {FunctionComponent, useState, SetStateAction, Dispatch, useEffect} from 'react';
 import styled from '@emotion/styled';
 import {useDispatch, useSelector} from 'react-redux';
 import {signUp} from '../../src/actions/auth';
@@ -22,6 +22,10 @@ const Screen: FunctionComponent<ScreenProps> = ({showSignIn}) => {
 		dispatch(signUp(email, username, password));
 		setLoading(true);
 	};
+
+	useEffect(() => {
+		setLoading(false)
+	}, [error])
 
 	const renderModal = () => {
 		return (

@@ -29,6 +29,10 @@ const SignInScreen: FunctionComponent<ScreenProps> = ({showSignUp}) => {
 		setLoading(true);
 	};
 
+	useEffect(() => {
+		setLoading(false)
+	}, [error])
+
 	const renderModal = () => {
 		return (
 			<Modal>
