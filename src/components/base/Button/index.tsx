@@ -29,6 +29,10 @@ const Button = styled.button<ElementProps>`
     height: ${props => props.height};
     padding: 10px;
     border-radius: 5px;
+	&:hover {
+		cursor: pointer;
+		font-weight: bold;
+    }
 `;
 
 export default BaseButton;

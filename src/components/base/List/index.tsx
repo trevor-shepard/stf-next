@@ -8,13 +8,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		root: {
 			width: '100%',
 			backgroundColor: theme.palette.background.paper,
-			overflow: 'scroll'
-		},
-		nested: {
-			paddingLeft: theme.spacing(4),
+			overflow: 'scroll',
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
+			flexDirection: "column"
+		},
+		nested: {
+			paddingLeft: theme.spacing(4),
+			
 			color: theme.palette.primary.main
 		}
 	})

@@ -31,7 +31,7 @@ const Screen: FunctionComponent<ScreenProps> = ({showSignIn}) => {
 				<TextField value={email} label="email" type="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
 				<TextField value={password} label="password" type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
 				<BaseButton handleClick={handleSignUp} label="Sign Up" />
-				<Link href="/sign-in"><a>Already have an account?</a></Link>
+				<Link href="/sign-in"><SignInLink>Already have an account?</SignInLink></Link>
 
 			</Modal>
 		);
@@ -53,5 +53,16 @@ const Container = styled.div`
   flex-direction: column;
   position: relative;
 `;
+
+const SignInLink = styled.a`
+	margin-top: 10px;
+	color: blue;
+	text-decoration: underline;
+	&:hover {
+		cursor: pointer;
+		font-weight: bold;
+		text-decoration: underline;
+    }
+`
 
 export default Screen;

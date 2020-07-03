@@ -6,8 +6,7 @@ import List from '../../base/List';
 import Confirm from './Confirm';
 
 import { ThemeProvider } from 'emotion-theming'
-import defaultTheme from '../../../styles/defaultTheme'
-import { Theme } from '../../../types'
+import {Default as DefaultTheme} from '../../../styles/themes'
 
 
 const Screen: FunctionComponent = () => {
@@ -27,7 +26,7 @@ const Screen: FunctionComponent = () => {
 	});
 	
 	return (
-			<ThemeProvider theme={defaultTheme}>
+			<ThemeProvider theme={DefaultTheme}>
 				<Container >
 					<h2>What you got going on today?</h2>
 
@@ -55,7 +54,8 @@ const ListItem = styled.div`
 	background-color: ${props => props.theme.colors.primary};
 	border-radius: 4px;
 	color: ${props => props.theme.colors.text};
-	
+	margin-top: 10px;
+	max-width: 300px;
 `
 
 export default Screen;

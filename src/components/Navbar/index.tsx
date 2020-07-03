@@ -2,23 +2,43 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import {useMediaQuery} from 'react-responsive';
+
 function NavBarScreen() {
+	const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'});
+
 	const profile = useSelector(state => state.profile);
 	const token = useSelector(state => state.token);
 	if (!token) {
 		return null;
 	}
 
-	return (
-		<NavBar>
-			<div>
-				{profile.username}
-			</div>
+	const navlinks = isTabletOrMobile ?
+		(
 			<NavLinks>
 
 				<Link href="/home">
 					<NavLink>
                         Home
+					</NavLink>
+				</Link>
+				<Link href="/join">
+					<NavLink>
+                        Join
+					</NavLink>
+				</Link>
+			</NavLinks>
+		) : (
+			<NavLinks>
+
+				<Link href="/home">
+					<NavLink>
+                        Home
+					</NavLink>
+				</Link>
+				<Link href="/log">
+					<NavLink>
+                        Log
 					</NavLink>
 				</Link>
 				<Link href="/create">
@@ -32,6 +52,17 @@ function NavBarScreen() {
 					</NavLink>
 				</Link>
 			</NavLinks>
+		)
+
+
+	return (
+		<NavBar>
+			<Link href="/home">
+				<NavLink>
+					{profile.username}
+				</NavLink>
+				</Link>
+			{navlinks}
 		</NavBar>
 	);
 }
@@ -49,7 +80,6 @@ const NavBar = styled.div`
 const NavLinks = styled.ul`
     display: flex;
     flex-direction: row;
-    margin-right: 20px;
 `;
 const NavLink = styled.a`
     padding-right: 10px;

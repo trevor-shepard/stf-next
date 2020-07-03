@@ -1,4 +1,5 @@
-export default  {
+import {Theme} from '../types'
+export const Default: Theme =  {
     colors: {
         text: "#4E5154",
         background: "#63666A",
