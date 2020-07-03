@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import { withRedux } from "../../lib/with-redux-store";
-import styled from "@emotion/styled";
-import Router from "next/router";
-import { useSelector } from "react-redux";
-import Navbar from "./Navbar";
+import React, {useEffect} from 'react';
+import {withRedux} from '../../lib/with-redux-store';
+import styled from '@emotion/styled';
+import Router from 'next/router';
+import {useSelector} from 'react-redux';
+import Navbar from './Navbar';
 
-function Layout({ children }) {
-  const token = useSelector((state) => state.token);
-  useEffect(() => {
-    if (token === null) {
-      Router.push("/sign-in");
-    }
-  }, [token]);
+function Layout({children}) {
+	const token = useSelector(state => state.token);
+	useEffect(() => {
+		if (token === null) {
+			Router.push('/sign-in');
+		}
+	}, [token]);
 
-  return (
-    <Container>
-      <Navbar />
-      {children}
-    </Container>
-  );
+	return (
+		<Container>
+			<Navbar />
+			{children}
+		</Container>
+	);
 }
 
 const Container = styled.div`

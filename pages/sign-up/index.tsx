@@ -16,7 +16,7 @@ type ScreenProps = {
   showSignIn: Dispatch<SetStateAction<boolean>>;
 };
 
-const Screen: FunctionComponent<ScreenProps> = ({ showSignIn }) => {
+const Screen: FunctionComponent<ScreenProps> = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

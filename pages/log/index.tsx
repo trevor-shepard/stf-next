@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
-import styled from "@emotion/styled";
-import Logger from "../../src/components/Events/Logger";
+import React, {FunctionComponent} from 'react';
+import styled from '@emotion/styled';
+import Logger from '../../src/components/Events/Logger';
 const Screen: FunctionComponent = () => {
-  return (
-    <Container>
-      <Logger />
-    </Container>
-  );
+	return (
+		<Container>
+			<Logger />
+		</Container>
+	);
 };
 
 const Container = styled.div`
