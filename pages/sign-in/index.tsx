@@ -30,8 +30,8 @@ const SignInScreen: FunctionComponent<ScreenProps> = ({showSignUp}) => {
 	};
 
 	useEffect(() => {
-		setLoading(false)
-	}, [error])
+		setLoading(false);
+	}, [error]);
 
 	const renderModal = () => {
 		return (
@@ -71,7 +71,6 @@ const SignUpLink = styled.a`
 		font-weight: bold;
 		text-decoration: underline;
     }
-`
-
+`;
 
 export default SignInScreen;

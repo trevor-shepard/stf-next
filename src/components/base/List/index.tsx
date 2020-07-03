@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
-			flexDirection: "column"
+			flexDirection: 'column'
 		},
 		nested: {
 			paddingLeft: theme.spacing(4),
-			
+
 			color: theme.palette.primary.main
 		}
 	})

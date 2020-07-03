@@ -1,6 +1,3 @@
-const path = require('path');
-
-
 module.exports = {
 	env: {
 		FIREBASE_API_KEY: 'AIzaSyAzC-8JZYo31p9CiPnYEurlc3MLau7uyvQ',
@@ -10,8 +7,8 @@ module.exports = {
 		FIREBASE_STORAGE_BUCKET: 'shame-tf.appspot.com',
 		FIREBASE_MESSAGING_SENDER_ID: '637680962940',
 		FIREBASE_APP_ID: '1:637680962940:web:cc564fb822574d746c68f9'
-	},
-	// webpack: function(config, { dev }) {
+	}
+	// Webpack: function(config, { dev }) {
 
 	// 	config.resolve.alias = {
 	// 		Components: path.resolve(__dirname, "components/")

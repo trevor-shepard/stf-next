@@ -5,7 +5,6 @@ import Router from 'next/router';
 import {useSelector} from 'react-redux';
 import Navbar from './Navbar';
 
-
 function Layout({children}) {
 	const token = useSelector(state => state.token);
 	useEffect(() => {
@@ -14,12 +13,11 @@ function Layout({children}) {
 		}
 	  }, [token]);
 
-
 	return (
-			<Container>
-				<Navbar />
-				{children}
-			</Container>
+		<Container>
+			<Navbar />
+			{children}
+		</Container>
 	);
 }
 

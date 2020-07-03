@@ -52,8 +52,7 @@ function NavBarScreen() {
 					</NavLink>
 				</Link>
 			</NavLinks>
-		)
-
+		);
 
 	return (
 		<NavBar>
@@ -61,7 +60,7 @@ function NavBarScreen() {
 				<NavLink>
 					{profile.username}
 				</NavLink>
-				</Link>
+			</Link>
 			{navlinks}
 		</NavBar>
 	);

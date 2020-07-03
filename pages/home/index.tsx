@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 import styled from '@emotion/styled';
 import SeasonList from '../../src/components/Seasons/List';
 import {Logger} from '../../src/components/Events';

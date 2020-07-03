@@ -5,9 +5,8 @@ import {useSelector} from 'react-redux';
 import List from '../../base/List';
 import Confirm from './Confirm';
 
-import { ThemeProvider } from 'emotion-theming'
-import {Default as DefaultTheme} from '../../../styles/themes'
-
+import {ThemeProvider} from 'emotion-theming';
+import {Default as DefaultTheme} from '../../../styles/themes';
 
 const Screen: FunctionComponent = () => {
 	const profile = useSelector(state => state.profile);
@@ -16,7 +15,6 @@ const Screen: FunctionComponent = () => {
 		return (<div>Loading</div>);
 	}
 
-
 	const activities = Object.keys(profile.activities).map((activity, index) => {
 		return (
 			<ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)} >
@@ -24,15 +22,15 @@ const Screen: FunctionComponent = () => {
 			</ListItem>
 		);
 	});
-	
-	return (
-			<ThemeProvider theme={DefaultTheme}>
-				<Container >
-					<h2>What you got going on today?</h2>
 
-					{activity === '' ? <List> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
-				</Container>
-			</ThemeProvider>
+	return (
+		<ThemeProvider theme={DefaultTheme}>
+			<Container >
+				<h2>What you got going on today?</h2>
+
+				{activity === '' ? <List> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
+			</Container>
+		</ThemeProvider>
 	);
 };
 
@@ -56,6 +54,6 @@ const ListItem = styled.div`
 	color: ${props => props.theme.colors.text};
 	margin-top: 10px;
 	max-width: 300px;
-`
+`;
 
 export default Screen;

@@ -24,8 +24,8 @@ const Screen: FunctionComponent<ScreenProps> = ({showSignIn}) => {
 	};
 
 	useEffect(() => {
-		setLoading(false)
-	}, [error])
+		setLoading(false);
+	}, [error]);
 
 	const renderModal = () => {
 		return (
@@ -67,6 +67,6 @@ const SignInLink = styled.a`
 		font-weight: bold;
 		text-decoration: underline;
     }
-`
+`;
 
 export default Screen;
