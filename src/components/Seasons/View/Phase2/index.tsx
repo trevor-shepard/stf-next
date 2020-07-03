@@ -1,83 +1,100 @@
-import React, {FunctionComponent, useState, useEffect} from 'react';
-import styled from '@emotion/styled';
-import {useDispatch, useSelector} from 'react-redux';
-import {getEvents} from '../../../../actions';
-import {Season} from '../../../../types';
-import StandingChart from './StandingsChart';
+import React, { FunctionComponent, useState, useEffect } from "react";
+import styled from "@emotion/styled";
+import { useDispatch, useSelector } from "react-redux";
+import { getEvents } from "../../../../actions";
+import { Season } from "../../../../types";
+import StandingChart from "./StandingsChart";
 interface ScreenProps {
-	season: Season;
+  season: Season;
 }
-const Screen: FunctionComponent<ScreenProps> = ({season}) => {
-	const {id, users, activities} = season;
-	const [loading, setLoading] = useState(true);
+const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
+  const { id, users, activities } = season;
+  const [loading, setLoading] = useState(true);
 
-	const [totalStandings, setTotalStandings] = useState(Object.keys(users).reduce((acc, userID) => {
-		return {...acc, [userID]: 0};
-	}, {}));
+  const [totalStandings, setTotalStandings] = useState(
+    Object.keys(users).reduce((acc, userID) => {
+      return { ...acc, [userID]: 0 };
+    }, {})
+  );
 
-	const [activityStandings, setActivityStandings] = useState(Object.keys(activities).reduce((acc, activityName) => {
-		return {...acc, [activityName]: Object.keys(users).reduce((acc, userID) => {
-			return {...acc, [userID]: []};
-		}, {})};
-	}, {}));
+  const [activityStandings, setActivityStandings] = useState(
+    Object.keys(activities).reduce((acc, activityName) => {
+      return {
+        ...acc,
+        [activityName]: Object.keys(users).reduce((acc, userID) => {
+          return { ...acc, [userID]: [] };
+        }, {}),
+      };
+    }, {})
+  );
 
-	const events = useSelector(state => state.events);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getEvents(id));
-	}, []);
+  const events = useSelector((state) => state.events);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEvents(id));
+  }, []);
 
-	useEffect(() => {
-		if (Object.keys(events).length === 0) {
-			return;
-		}
+  useEffect(() => {
+    if (Object.keys(events).length === 0) {
+      return;
+    }
 
-		const updatedTotalStandings = JSON.parse(JSON.stringify(totalStandings));
-		const updatedActivityStandings = JSON.parse(JSON.stringify(activityStandings));
-		for (const userID of Object.keys(events)) {
-			const userEvents = events[userID];
-			let userTotal = 0;
-			const userActivtyLog = {};
-			for (const event of userEvents) {
-				if (!Object.keys(activities).includes(event.activity)) {
-					continue;
-				}
+    const updatedTotalStandings = JSON.parse(JSON.stringify(totalStandings));
+    const updatedActivityStandings = JSON.parse(
+      JSON.stringify(activityStandings)
+    );
+    for (const userID of Object.keys(events)) {
+      const userEvents = events[userID];
+      let userTotal = 0;
+      const userActivtyLog = {};
+      for (const event of userEvents) {
+        if (!Object.keys(activities).includes(event.activity)) {
+          continue;
+        }
 
-				userTotal += activities[event.activity];
+        userTotal += activities[event.activity];
 
-				if (userActivtyLog[event.activity] === undefined) {
-					userActivtyLog[event.activity] = [event];
-				} else {
-					userActivtyLog[event.activity] = [...userActivtyLog[event.activity], event];
-				}
-			}
+        if (userActivtyLog[event.activity] === undefined) {
+          userActivtyLog[event.activity] = [event];
+        } else {
+          userActivtyLog[event.activity] = [
+            ...userActivtyLog[event.activity],
+            event,
+          ];
+        }
+      }
 
-			updatedTotalStandings[userID] = userTotal;
+      updatedTotalStandings[userID] = userTotal;
 
-			for (const activityName of Object.keys(userActivtyLog)) {
-				if (!Object.keys(activities).includes(activityName)) {
-					continue;
-				}
+      for (const activityName of Object.keys(userActivtyLog)) {
+        if (!Object.keys(activities).includes(activityName)) {
+          continue;
+        }
 
-				updatedActivityStandings[activityName][userID] = userActivtyLog[activityName];
-			}
-		}
+        updatedActivityStandings[activityName][userID] =
+          userActivtyLog[activityName];
+      }
+    }
 
-		setTotalStandings(updatedTotalStandings);
-		setActivityStandings(updatedActivityStandings);
+    setTotalStandings(updatedTotalStandings);
+    setActivityStandings(updatedActivityStandings);
 
-		setLoading(false);
-	}, [events]);
+    setLoading(false);
+  }, [events]);
 
-	if (loading) {
-		return (<div>Loading</div>);
-	}
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
-	return (
-		<Container>
-			<StandingChart season={season} totalStandings={totalStandings} activityStandings={activityStandings} />
-		</Container>
-	);
+  return (
+    <Container>
+      <StandingChart
+        season={season}
+        totalStandings={totalStandings}
+        activityStandings={activityStandings}
+      />
+    </Container>
+  );
 };
 
 const Container = styled.div`
