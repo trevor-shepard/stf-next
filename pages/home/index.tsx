@@ -1,15 +1,15 @@
-import React, {FunctionComponent} from 'react';
-import styled from '@emotion/styled';
-import SeasonList from '../../src/components/Seasons/List';
-import {Logger} from '../../src/components/Events';
-import {useMediaQuery} from 'react-responsive';
+import React, { FunctionComponent } from "react";
+import styled from "@emotion/styled";
+import SeasonList from "../../src/components/Seasons/List";
+import { Logger } from "../../src/components/Events";
+import { useMediaQuery } from "react-responsive";
 
 const Screen: FunctionComponent = () => {
-	const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'});
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 600px)" });
 
-	return (
-		<Container>{isTabletOrMobile ? <Logger /> : <SeasonList />}</Container>
-	);
+  return (
+    <Container>{isTabletOrMobile ? <Logger /> : <SeasonList />}</Container>
+  );
 };
 
 const Container = styled.div`

@@ -1,12 +1,12 @@
-import React, {FunctionComponent, useState} from 'react';
-import styled from '@emotion/styled';
-import SeasonJoin from '../../src/components/Seasons/Join';
+import React, { FunctionComponent } from "react";
+import styled from "@emotion/styled";
+import SeasonJoin from "../../src/components/Seasons/Join";
 const Screen: FunctionComponent = () => {
-	return (
-		<Container>
-			<SeasonJoin />
-		</Container>
-	);
+  return (
+    <Container>
+      <SeasonJoin />
+    </Container>
+  );
 };
 
 const Container = styled.div`

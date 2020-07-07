@@ -1,13 +1,6 @@
-import React, {
-  FunctionComponent,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
-import styled from "@emotion/styled";
+import React, { FunctionComponent, Dispatch, SetStateAction } from "react";
 import { Modal, Button } from "../../../base";
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
 
 interface ScreenProps {
   activity: string;

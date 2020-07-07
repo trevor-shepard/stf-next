@@ -1,35 +1,35 @@
-import React, {FunctionComponent, SetStateAction, Dispatch} from 'react';
-import styled from '@emotion/styled';
-import {Modal, Button} from '../../base';
-import {useDispatch} from 'react-redux';
-import {createEvent} from '../../../actions/events';
+import React, { FunctionComponent, SetStateAction, Dispatch } from "react";
+import styled from "@emotion/styled";
+import { Modal, Button } from "../../base";
+import { useDispatch } from "react-redux";
+import { createEvent } from "../../../actions/events";
 type ScreenProps = {
-	activity: string;
-	setActivity: Dispatch<SetStateAction<string>>;
+  activity: string;
+  setActivity: Dispatch<SetStateAction<string>>;
 };
 
-const Screen: FunctionComponent<ScreenProps> = ({activity, setActivity}) => {
-	const dispatch = useDispatch();
+const Screen: FunctionComponent<ScreenProps> = ({ activity, setActivity }) => {
+  const dispatch = useDispatch();
 
-	const handleLog = async () => {
-		await dispatch(createEvent({activity}));
-		setActivity('');
-	};
+  const handleLog = async () => {
+    await dispatch(createEvent({ activity }));
+    setActivity("");
+  };
 
-	const cancel = () => {
-		setActivity('');
-	};
+  const cancel = () => {
+    setActivity("");
+  };
 
-	return (
-		<PopUp>
-			<h3>Confirm {activity}</h3>
+  return (
+    <PopUp>
+      <h3>Confirm {activity}</h3>
 
-			<ButtonRow>
-				<Button handleClick={handleLog} label="Confirm" />
-				<Button handleClick={cancel} label="Cancel" />
-			</ButtonRow>
-		</PopUp>
-	);
+      <ButtonRow>
+        <Button handleClick={handleLog} label="Confirm" />
+        <Button handleClick={cancel} label="Cancel" />
+      </ButtonRow>
+    </PopUp>
+  );
 };
 
 const ButtonRow = styled.div`
