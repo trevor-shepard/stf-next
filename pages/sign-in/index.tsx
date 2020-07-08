@@ -10,7 +10,6 @@ import Link from "next/link";
 import { RootState } from "../../src/types";
 
 const SignInScreen: FunctionComponent = () => {
-  console.log("env:", process.env);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const error = useSelector((state: RootState) => state.error);

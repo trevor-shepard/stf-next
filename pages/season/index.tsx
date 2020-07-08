@@ -12,9 +12,11 @@ const Screen: FunctionComponent = () => {
   const router = useRouter();
   const id = router.query.id as string;
 
-  if (!id) {
-    Router.push("/");
-  }
+  useEffect(() => {
+    if (!id) {
+      Router.push("/");
+    }
+  }, []);
 
   const season = seasons[id];
 
