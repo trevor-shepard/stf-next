@@ -53,7 +53,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
   const columns: Column[] = Object.keys(users)
     .sort((a, b) => users[a].localeCompare(users[b]))
     .reduce(
-      (acc, userID) => {
+      (acc: Column[], userID: string) => {
         const username = users[userID];
         const column: Column = {
           id: userID,
@@ -113,7 +113,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, i) => {
+              .map((row: { [activity: string]: string }, i) => {
                 return (
                   <TableRow
                     hover

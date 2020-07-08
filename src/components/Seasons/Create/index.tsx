@@ -29,6 +29,14 @@ const Screen: FunctionComponent = () => {
     dispatch(createSeason({ name, voteStart, seasonStart }));
   };
 
+  const handleVoteStart = (date: any) => {
+    setVoteStart(date);
+  };
+
+  const handleSeasonStart = (date: any) => {
+    setSeasonStart(date);
+  };
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Modal>
@@ -44,13 +52,13 @@ const Screen: FunctionComponent = () => {
         <DatePicker
           className="remove-bottom-border"
           value={voteStart}
-          onChange={setVoteStart}
+          onChange={handleVoteStart}
           disablePast={true}
         />
         <DatePicker
           className="remove-bottom-border"
           value={seasonStart}
-          onChange={setSeasonStart}
+          onChange={handleSeasonStart}
           disablePast={true}
         />
         <BaseButton handleClick={handleCreate} label="Create Season" />

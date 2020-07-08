@@ -49,7 +49,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [rows, setRows] = useState<{ activity: string }[]>([]);
+  const [rows, setRows] = useState<{ [activity: string]: string }[]>([]);
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -62,7 +62,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
   const columns: Column[] = Object.keys(users)
     .sort((a, b) => users[a].localeCompare(users[b]))
     .reduce(
-      (acc, userID) => {
+      (acc: Column[], userID: string): Column[] => {
         const username = users[userID];
         const column: Column = {
           id: userID,
@@ -77,7 +77,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
       [{ id: "activity", label: "Activity", minWidth: 170 }]
     );
 
-  const createData = (activity: string, votes: VotesMap) => {
+  const createData = (activity: string, votes: { [id: string]: number }) => {
     return Object.keys(votes).reduce(
       (acc, userID) => ({ ...acc, [userID]: votes[userID] }),
       { activity }
@@ -86,7 +86,8 @@ const Screen: FunctionComponent<ScreenProps> = ({
 
   useEffect(() => {
     return setRows(
-      Object.keys(votes).map((activity) => createData(activity, votes[activity])
+      Object.keys(votes).map((activity) =>
+        createData(activity, votes[activity])
       )
     );
   }, [votes]);
@@ -120,7 +121,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
                     key={`${i}-row`}
                     onClick={() => setActivity(row.activity)}
                   >
-                    {columns.map((column) => {
+                    {columns.map((column: Column) => {
                       const value = row[column.id];
                       return (
                         <TableCell
