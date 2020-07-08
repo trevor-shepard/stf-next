@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
+import Router from "next/router";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../src/actions/auth";
@@ -12,8 +13,15 @@ const Screen: FunctionComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const error = useSelector((state: RootState) => state.error);
+  const token = useSelector((state: RootState) => state.token);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      Router.push("/home");
+    }
+  }, [token]);
 
   const handleSignUp = () => {
     dispatch(signUp(email, username, password));

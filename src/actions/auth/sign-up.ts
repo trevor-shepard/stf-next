@@ -10,7 +10,7 @@ const signUp = (
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	return async (dispatch: Dispatch )=> {
 		try {
-			const profile = await post('user', {email, username, password});
+			await post('user', {email, username, password});
 
 			const token = await firebase
 				.auth()
@@ -20,6 +20,8 @@ const signUp = (
 					if (!resp) throw Error('cannot verify user')
 					return resp.user ? resp.user.getIdToken() : null
 				});
+				
+			const profile = await get('user', token);
 
 			const seasons = await get('user/seasons', token);
 

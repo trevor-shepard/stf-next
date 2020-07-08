@@ -18,6 +18,10 @@ const Screen: FunctionComponent = () => {
     );
   }
 
+  if (Object.keys(profile.seasons).length === 0) {
+    return <div>Start or Join a season!</div>;
+  }
+  debugger
   const seasons = Object.keys(profile.seasons).map((id, index) => {
     const season = profile.seasons[id];
     return (

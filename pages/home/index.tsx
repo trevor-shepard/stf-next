@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 
 const Screen: FunctionComponent = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 600px)" });
-
+  debugger
   return (
     <Container>{isTabletOrMobile ? <Logger /> : <SeasonList />}</Container>
   );
