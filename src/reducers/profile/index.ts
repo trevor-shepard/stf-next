@@ -9,10 +9,11 @@ import {
 } from '../../types';
 
 const initialState: Profile = {
-	userName: null,
+	username: null,
 	email: null,
 	id: null,
-	seasons: {}
+	seasons: {},
+	activities: {}
 };
 
 const profileReducer = (
@@ -27,7 +28,7 @@ const profileReducer = (
 		case USER_UPDATED:
 			return action.payload;
 		case LOG_OUT:
-			return null;
+			return initialState;
 		default:
 			return state;
 	}

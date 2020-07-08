@@ -23,3 +23,4 @@ interface ClearEventAction {
 }
 
 export type EventActions = RecieveEventsAction | ClearEventAction;
+

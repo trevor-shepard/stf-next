@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../../../../actions";
-import { Season } from "../../../../types";
+import { Season, RootState, Event } from "../../../../types";
 import StandingChart from "./StandingsChart";
 interface ScreenProps {
   season: Season;
@@ -28,7 +28,7 @@ const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
     }, {})
   );
 
-  const events = useSelector((state) => state.events);
+  const events = useSelector((state: RootState) => state.events);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEvents(id));
@@ -43,10 +43,14 @@ const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
     const updatedActivityStandings = JSON.parse(
       JSON.stringify(activityStandings)
     );
+
+    type UserActivityLog = {
+      [activity: string]: Event[];
+    }
     for (const userID of Object.keys(events)) {
       const userEvents = events[userID];
       let userTotal = 0;
-      const userActivtyLog = {};
+      const userActivtyLog = {} as UserActivityLog;
       for (const event of userEvents) {
         if (!Object.keys(activities).includes(event.activity)) {
           continue;

@@ -1,12 +1,14 @@
 import {post, get} from '../../../lib/rest-utility';
 import firebase from '../../../lib/firebase';
+import {Dispatch} from "redux"
 
 const signUp = (
 	email: string,
 	username: string,
 	password: string
 ) => {
-	return async dispatch => {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	return async (dispatch: Dispatch )=> {
 		try {
 			const profile = await post('user', {email, username, password});
 
@@ -15,7 +17,8 @@ const signUp = (
 				.signInWithEmailAndPassword(email, password)
 				.then(async resp => {
 					console.log('response:', resp);
-					return resp.user.getIdToken();
+					if (!resp) throw Error('cannot verify user')
+					return resp.user ? resp.user.getIdToken() : null
 				});
 
 			const seasons = await get('user/seasons', token);

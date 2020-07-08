@@ -1,7 +1,10 @@
 import {put, get} from '../../../lib/rest-utility';
+import { Dispatch } from 'redux';
+import { RootState } from '../../types';
 
 const joinSeason = (seasonID: string) => {
-	return async (dispatch, getState) => {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	return async (dispatch: Dispatch, getState: () => RootState) => {
 		try {
 			const {token} = getState();
 			const season = await put(`season/${seasonID}/join`, {}, token);

@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 interface ScreenProps {
   activity: string;
   value: number;
-  error: string;
+  error: string | null;
   setActivity: Dispatch<SetStateAction<string>>;
   setValue: Dispatch<SetStateAction<number>>;
   handleVote: () => void;

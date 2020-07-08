@@ -1,18 +1,20 @@
 import {get} from '../../../lib/rest-utility';
 import firebase from '../../../lib/firebase';
-
+import {Dispatch} from "redux"
 const signIn = (
 	email: string,
 	password: string
 ) => {
-	return async dispatch => {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	return async (dispatch: Dispatch) => {
 		try {
 			const token = await firebase
 				.auth()
 				.signInWithEmailAndPassword(email, password)
-				.then(async resp => {
+				.then(async (resp )=> {
 					console.log('response:', resp);
-					return resp.user.getIdToken();
+					if (!resp) throw Error('cannot verify user')
+					return resp.user ? resp.user.getIdToken() : null
 				});
 			const profile = await get('user', token);
 			dispatch({type: 'TOKEN_GRANTED', payload: token});

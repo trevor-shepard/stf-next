@@ -12,3 +12,5 @@ interface ClearErrorAction {
 }
 
 export type ErrorActionTypes = ErrorAction | ClearErrorAction;
+
+export type ErrorState = string | null;

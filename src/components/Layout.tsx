@@ -4,9 +4,10 @@ import styled from "@emotion/styled";
 import Router from "next/router";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
+import { RootState } from "../types";
 
-function Layout({ children }) {
-  const token = useSelector((state) => state.token);
+const Layout: React.FunctionComponent = ({ children }) => {
+  const token = useSelector((state: RootState) => state.token);
   useEffect(() => {
     if (token === null) {
       Router.push("/sign-in");

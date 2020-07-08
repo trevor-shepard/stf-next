@@ -1,14 +1,14 @@
 export interface UserMap {
-	[userID: string]: string;
+	[id: string]: string;
 }
 
 export interface ActivtitesMap {
-	[activityName: string]: number;
+	[activity: string]: number;
 }
 
 export interface VotesMap {
 	[activity: string]: {
-		[userID: string]: number;
+		[id: string]: number;
 	};
 }
 

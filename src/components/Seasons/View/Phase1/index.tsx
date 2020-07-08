@@ -12,7 +12,7 @@ const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
   const { seasonStart, votes, users, id } = season;
   const [activity, setActivity] = useState("");
   const [value, setValue] = useState(0);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
   const handleVote = async () => {
     if (activity === "") {

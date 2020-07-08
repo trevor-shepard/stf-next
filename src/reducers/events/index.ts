@@ -10,6 +10,7 @@ const eventsReducer = (
 ) => {
 	switch (action.type) {
 		case RECIEVE_EVENTS:
+			debugger;
 			return action.payload;
 		case CLEAR_EVENTS:
 			return {};

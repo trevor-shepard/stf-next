@@ -20,7 +20,7 @@ const Screen: FunctionComponent<ScreenProps> = ({ season }) => {
     <Container>
       <h3>Waiting for Players to Join, Season Starts on {voteStart}</h3>
       <div>Invite friends with the code {season.id}</div>
-      <List title="Players">{users}</List>
+      <List>{users}</List>
     </Container>
   );
 };

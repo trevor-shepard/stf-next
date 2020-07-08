@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function NestedList({ children }) {
+const NestedList: React.FunctionComponent = ({ children }) => {
   const classes = useStyles();
   return (
     <List
@@ -32,4 +32,6 @@ export default function NestedList({ children }) {
       {children}
     </List>
   );
-}
+};
+
+export default NestedList;

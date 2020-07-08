@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "test": "xo",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "emotion-theming": "^10.0.27",
     "eslint-plugin-react": "^7.20.3",
     "firebase": "^7.15.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.7",
     "moment": "^2.26.0",
     "next": "^9.4.0",
     "react": "^16.13.1",

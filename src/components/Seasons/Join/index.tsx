@@ -6,9 +6,10 @@ import Modal from "../../base/Modal";
 import BaseButton from "../../base/Button";
 import { joinSeason } from "../../../actions/seasons";
 import Router from "next/router";
+import { RootState } from "../../../types";
 
 const Screen: FunctionComponent = () => {
-  const seasons = useSelector((state) => state.seasons);
+  const seasons = useSelector((state: RootState) => state.seasons);
   const [seasonID, setSeasonID] = useState("");
   const [request, setRequest] = useState(false);
   const [error, setError] = useState("");

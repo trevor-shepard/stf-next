@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
+import { RootState } from "../../types";
 
 function NavBarScreen() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 600px)" });
 
-  const profile = useSelector((state) => state.profile);
-  const token = useSelector((state) => state.token);
+  const profile = useSelector((state: RootState) => state.profile);
+  const token = useSelector((state: RootState) => state.token);
   if (!token) {
     return null;
   }

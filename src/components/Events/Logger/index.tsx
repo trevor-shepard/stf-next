@@ -7,9 +7,10 @@ import Confirm from "./Confirm";
 
 import { ThemeProvider } from "emotion-theming";
 import { Default as DefaultTheme } from "../../../styles/themes";
+import { RootState, Theme } from "../../../types";
 
 const Screen: FunctionComponent = () => {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state: RootState) => state.profile);
   const [activity, setActivity] = useState("");
   if (!profile.id || profile.id === null) {
     return <div>Loading</div>;
@@ -50,7 +51,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ListItem = styled.div`
+const ListItem = styled.div<{ theme: Theme }>`
   display: flex;
   align-items: center;
   justify-content: center;

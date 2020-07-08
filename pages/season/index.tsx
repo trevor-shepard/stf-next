@@ -5,10 +5,17 @@ import { useSelector } from "react-redux";
 import Phase0 from "../../src/components/Seasons/View/Phase0";
 import Phase1 from "../../src/components/Seasons/View/Phase1";
 import Phase2 from "../../src/components/Seasons/View/Phase2";
+import { RootState } from "../../src/types";
+
 const Screen: FunctionComponent = () => {
-  const seasons = useSelector((state) => state.seasons);
+  const seasons = useSelector((state: RootState) => state.seasons);
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id as string;
+
+  if (!id) {
+    Router.push("/");
+  }
+
   const season = seasons[id];
 
   useEffect(() => {

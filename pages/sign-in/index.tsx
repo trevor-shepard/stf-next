@@ -1,10 +1,4 @@
-import React, {
-  FunctionComponent,
-  useState,
-  SetStateAction,
-  Dispatch,
-  useEffect,
-} from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import Router from "next/router";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,15 +7,14 @@ import TextField from "@material-ui/core/TextField";
 import Modal from "../../src/components/base/Modal";
 import BaseButton from "../../src/components/base/Button";
 import Link from "next/link";
-type ScreenProps = {
-  showSignUp: Dispatch<SetStateAction<boolean>>;
-};
+import { RootState } from "../../src/types";
 
-const SignInScreen: FunctionComponent<ScreenProps> = ({showSignUp}) => {
+const SignInScreen: FunctionComponent = () => {
+  console.log("env:", process.env);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const error = useSelector((state) => state.error);
-  const token = useSelector((state) => state.token);
+  const error = useSelector((state: RootState) => state.error);
+  const token = useSelector((state: RootState) => state.token);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {

@@ -6,9 +6,10 @@ import { ListItem, ListItemText } from "@material-ui/core";
 
 import List from "../../base/List";
 import Link from "next/link";
+import { RootState } from "../../../types";
 
 const Screen: FunctionComponent = () => {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state: RootState) => state.profile);
   if (!profile.seasons) {
     return (
       <Modal>
@@ -30,7 +31,7 @@ const Screen: FunctionComponent = () => {
 
   return (
     <SeasonList>
-      <List title="Your Seasons">{seasons}</List>
+      <List>{seasons}</List>
     </SeasonList>
   );
 };
