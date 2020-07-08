@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
-import SeasonJoin from "../../src/components/Seasons/Join";
+import Logger from "../../src/components/Events/Logger";
 const Screen: FunctionComponent = () => {
   return (
     <Container>
-      <SeasonJoin />
+      <Logger />
     </Container>
   );
 };

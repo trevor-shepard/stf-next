@@ -7,7 +7,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "xo"
+    "test": "xo",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +20,13 @@
     "@emotion/styled": "^10.0.27",
     "@material-ui/core": "^4.10.1",
     "@material-ui/pickers": "^3.2.10",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-responsive": "^8.0.2",
+    "@types/styled-components": "^5.1.0",
+    "emotion-theming": "^10.0.27",
+    "eslint-plugin-react": "^7.20.3",
     "firebase": "^7.15.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.7",
     "moment": "^2.26.0",
     "next": "^9.4.0",
     "react": "^16.13.1",
@@ -27,11 +35,13 @@
     "react-responsive": "^8.1.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "ts-loader": "^7.0.5"
   },
   "devDependencies": {
     "@types/node": "^14.0.11",
     "eslint-config-xo": "^0.30.0",
+    "prettier": "2.0.5",
     "typescript": "^3.9.5",
     "xo": "^0.32.0"
   }

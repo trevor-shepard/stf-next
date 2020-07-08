@@ -1,33 +1,45 @@
-import React, {FunctionComponent, useState} from 'react';
-import styled from '@emotion/styled';
-import {useSelector} from 'react-redux';
-import {
-	ListItem,
-	ListItemText
-} from '@material-ui/core';
-import List from '../../base/List';
-import Confirm from './Confirm';
+import React, { FunctionComponent, useState } from "react";
+import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
+
+import List from "../../base/List";
+import Confirm from "./Confirm";
+
+import { ThemeProvider } from "emotion-theming";
+import { Default as DefaultTheme } from "../../../styles/themes";
+import { RootState, Theme } from "../../../types";
+
 const Screen: FunctionComponent = () => {
-	const profile = useSelector(state => state.profile);
-	const [activity, setActivity] = useState('');
-	if (!profile.id || profile.id === null) {
-		return (<div>Loading</div>);
-	}
+  const profile = useSelector((state: RootState) => state.profile);
+  const [activity, setActivity] = useState("");
+  if (!profile.id || profile.id === null) {
+    return <div>Loading</div>;
+  }
 
-	const activities = Object.keys(profile.activities).map((activity, index) => {
-		return (
-			<ListItem key={`${index}-${activity}`} onClick={() => setActivity(activity)}>
-				<ListItemText primary={activity} />
-			</ListItem>
-		);
-	});
-	return (
-		<Container>
-			<h2>What you got going on today?</h2>
+  const activities = Object.keys(profile.activities).map((activity, index) => {
+    return (
+      <ListItem
+        key={`${index}-${activity}`}
+        onClick={() => setActivity(activity)}
+      >
+        {activity.toUpperCase()}
+      </ListItem>
+    );
+  });
 
-			{activity === '' ? <List title="Your Activites"> {activities} </List> : <Confirm activity={activity} setActivity={setActivity} />}
-		</Container>
-	);
+  return (
+    <ThemeProvider theme={DefaultTheme}>
+      <Container>
+        <h2>What you got going on today?</h2>
+
+        {activity === "" ? (
+          <List> {activities} </List>
+        ) : (
+          <Confirm activity={activity} setActivity={setActivity} />
+        )}
+      </Container>
+    </ThemeProvider>
+  );
 };
 
 const Container = styled.div`
@@ -35,8 +47,21 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   position: relative;
+  flex-direction: column;
+`;
+
+const ListItem = styled.div<{ theme: Theme }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  background-color: ${(props) => props.theme.colors.primary};
+  border-radius: 4px;
+  color: ${(props) => props.theme.colors.text};
+  margin-top: 10px;
+  max-width: 300px;
 `;
 
 export default Screen;

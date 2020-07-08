@@ -12,3 +12,5 @@ interface LogOutAction {
 }
 
 export type TokenActionTypes = TokenGrantedAction | LogOutAction;
+
+export type TokenState = null | string;

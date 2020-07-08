@@ -1,10 +1,13 @@
 export interface Profile {
-	userName: string | null;
+	username: string | null;
 	email: string | null;
 	id: string | null;
 	seasons: {
 		[seasonID: string]: string;
 	};
+	activities: {
+		[name: string]: string[]
+	}
 }
 
 export const SIGN_UP = 'SIGN_UP';

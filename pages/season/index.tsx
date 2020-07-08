@@ -1,46 +1,55 @@
-import React, {FunctionComponent, useEffect} from 'react';
-import styled from '@emotion/styled';
-import Router, {useRouter} from 'next/router';
-import {useSelector} from 'react-redux';
-import Phase0 from '../../src/components/Seasons/View/Phase0';
-import Phase1 from '../../src/components/Seasons/View/Phase1';
-import Phase2 from '../../src/components/Seasons/View/Phase2';
+import React, { FunctionComponent, useEffect } from "react";
+import styled from "@emotion/styled";
+import Router, { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import Phase0 from "../../src/components/Seasons/View/Phase0";
+import Phase1 from "../../src/components/Seasons/View/Phase1";
+import Phase2 from "../../src/components/Seasons/View/Phase2";
+import { RootState } from "../../src/types";
+
 const Screen: FunctionComponent = () => {
-	const seasons = useSelector(state => state.seasons);
-	const router = useRouter();
-	const {id} = router.query;
-	const season = seasons[id];
+  const seasons = useSelector((state: RootState) => state.seasons);
+  const router = useRouter();
+  const id = router.query.id as string;
 
-	useEffect(() => {
-		if (season === undefined) {
-			Router.push('/');
-		}
-	  }, [season]);
+  useEffect(() => {
+    if (!id) {
+      Router.push("/");
+    }
+  }, []);
 
-	const getPhase = () => {
-		switch (season.phase) {
-			case 0:
-				return (<Phase0 season={season}/>);
-			case 1:
-				return (<Phase1 season={season}/>);
-			case 2:
-				return (<Phase2 season={season}/>);
+  const season = seasons[id];
 
-			default:
-				break;
-		}
-	};
+  useEffect(() => {
+    if (season === undefined) {
+      Router.push("/");
+    }
+  }, [season]);
 
-	if (!season) {
-		return (<div>Loading</div>);
-	}
+  const getPhase = () => {
+    switch (season.phase) {
+      case 0:
+        return <Phase0 season={season} />;
+      case 1:
+        return <Phase1 season={season} />;
+      case 2:
+        return <Phase2 season={season} />;
 
-	return (
-		<Container>
-			<h1> {season.name} </h1>
-			{ getPhase() }
-		 </Container>
-	);
+      default:
+        break;
+    }
+  };
+
+  if (!season) {
+    return <div>Loading</div>;
+  }
+
+  return (
+    <Container>
+      <h1> {season.name} </h1>
+      {getPhase()}
+    </Container>
+  );
 };
 
 const Container = styled.div`
@@ -52,4 +61,4 @@ const Container = styled.div`
   position: relative;
 `;
 
-export default (Screen);
+export default Screen;
