@@ -28,7 +28,7 @@
     "firebase": "^7.15.0",
     "fork-ts-checker-webpack-plugin": "^5.0.7",
     "moment": "^2.26.0",
-    "next": "^9.4.0",
+    "next": "^13.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
